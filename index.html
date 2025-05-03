@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Inline CSS for specific styles */
+        .ribbon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%; /* Ensure it takes the full width */
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 30px; /* Increase padding to make the header bigger */
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Ensure it takes the full width */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            position: sticky; /* Make the header sticky */
+            top: 0; /* Stick to the top */
+            z-index: 1000; /* Ensure the header is above other elements */
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .company-logo {
+            height: 80px; /* Increase the height of the logo */
+            margin-right: 20px;
+        }
+
+        .company-name {
+            margin: 0;
+            font-size: 2.5em; /* Increase the font size */
+            color: #333;
+            align-self: center;
+        }
+
+        nav a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 0.9em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .header-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px; /* Increase padding */
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: auto; /* Align the button to the right */
+        }
+
+        .header-button:hover {
+            background-color: #0056b3;
+        }
+
+        .airline-preferences {
+            margin-top: 10px;
+        }
+
+        .airline-preferences label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .airline-preferences input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .additional-options {
+            margin-top: 10px;
+        }
+
+        .additional-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .additional-options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* Dropdown styles */
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 16px;
+            color: #333;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        option {
+            padding: 10px;
+        }
+
+        #dropdown1 {
+            width: 200px;
+            background-color: #f8f9fa;
+        }
+
+        #dropdown2 {
+            width: 150px;
+            background-color: #e9ecef;
+        }
+
+        .dropdown-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 250px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 10px;
+        }
+
+        .dropdown-content label {
+            display: block;
+            padding: 5px;
+        }
+
+        .dropdown-content input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .airline-type-options {
+            margin-top: 10px;
+        }
+
+        .airline-type-options label {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .airline-type-options input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo.png" alt="Company Logo" class="company-logo">
+            <h1 class="company-name">GET SET GO TRAVEL AGENCY</h1>
+        </div>
+        <div class="auth-forms">
+            <a href="#" onclick="showLoginForm()" title="Sign In"><i class="fas fa-sign-in-alt"></i></a>
+            <a href="#" onclick="showRegistrationForm()" title="Register Now"><i class="fas fa-user-plus"></i></a>
+            <a href="#" onclick="showForgotPasswordForm()" title="Forgot Password?"><i class="fas fa-key"></i></a>
+        </div>
+    </header>
+    <div id="auth-forms-container">
+        <button type="button" class="close-button" onclick="closeAuthForms()">×</button>
+        <form id="login-form" class="auth-form">
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="button" class="header-button" onclick="showLoginForm()">Sign In</button>
+        </form>
+        <form id="registration-form" class="auth-form">
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="button" class="header-button" onclick="showRegistrationForm()">Register</button>
+        </form>
+        <form id="forgot-password-form" class="auth-form">
+            <input type="email" placeholder="Email" required>
+            <button type="button" class="header-button" onclick="showForgotPasswordForm()">Reset Password</button>
+        </form>
+    </div>
+    <main class="bobfloat">
+        <aside class="left-section">
+            <nav class="vertical-menu">
+                <a href="#"><i class="fas fa-clipboard" aria-label="Notice Board"></i> Notice Board</a>
+                <a href="#"><i class="fas fa-plane"></i> ✈️ Search Flights</a>
+                <a href="#"><i class="fas fa-battery-full" aria-label="Recharge"></i> Recharge</a>
+                <a href="#"><i class="fas fa-question-circle"></i> ❓ How to Use</a>
+                <a href="#"><i class="fas fa-bell" aria-label="Airline Update"></i> Airline Update</a>
+                <a href="#"><i class="fas fa-cloud"></i> ☁️🚫 Offline Request</a>
+                <a href="#"><i class="fas fa-file-alt"></i> 📄 Itinerary</a>
+                <a href="#"><i class="fas fa-bus"></i> 🚌 Bus</a>
+                <a href="#"><i class="fas fa-car"></i> 🚗 Transfer</a>
+                <a href="#"><i class="fas fa-train"></i> 🚆 Rail</a>
+                <a href="#"><i class="fas fa-taxi"></i> 🚕 Cab</a>
+                <a href="#"><i class="fas fa-ship"></i> 🚢 Cruise</a>
+                <a href="#"><i class="fas fa-kaaba"></i> 🕋 Umrah</a>
+                <a href="#"><i class="fas fa-passport"></i> 📘 Passport</a>
+                <a href="#"><i class="fas fa-clipboard"></i> 📋 Notice Board</a>
+                <a href="#"><i class="fas fa-battery-full"></i> 🔋 Recharge</a>
+                <a href="#"><i class="fas fa-bell"></i> 🔔 Airline Update</a>
+                <a href="#"><i class="fas fa-file-invoice"></i> 🧾 GST Invoice Format</a>
+                <a href="#"><i class="fas fa-tags"></i> 🏷️ Offers</a>
+                <a href="#"><i class="fas fa-bullhorn"></i> 📢 Marketing</a>
+                <a href="#"><i class="fas fa-headset"></i> 🎧 Support</a>
+                <a href="#" data-icon="⚙️">Preferences</a>
+                <a href="#" data-icon="🧰">Utilities</a>
+                <a href="#" data-icon="📌">Hold Itineraries</a>
+            </nav>
+        </aside>
+        <section class="right-section">
+            <div class="flight-search">
+                <form id="flightSearchForm">
+                    <h2>Search Flights</h2>
+                    <div class="flight-options">
+                        <label>
+                            <input type="radio" name="tripType" value="one-way" checked>
+                            One Way
+                        </label>
+                        <label>
+                            <input type="radio" name="tripType" value="round-trip">
+                            Round Trip
+                        </label>
+                        <label>
+                            <input type="radio" name="tripType" value="multi-city">
+                            Multi-City
+                        </label>
+                    </div>
+                    <label for="origin" data-icon="📍">From:</label>
+                    <input type="text" id="origin" placeholder="From" required>
+                    <label for="destination" data-icon="📍">To:</label>
+                    <input type="text" id="destination" placeholder="To" required>
+                    <label for="departureDate" data-icon="📅">Depart:</label>
+                    <input type="date" id="departureDate" required>
+                    <label for="returnDate" data-icon="📅">Return:</label>
+                    <input type="date" id="returnDate">
+
+                    <!-- Passengers Dropdown -->
+                    <div class="travellersouter ng-tns">
+                        <div class="box ng-tns">
+                            <button type="button" class="dropdown-button">Travellers</button>
+                            <ul class="paxcounter-tns">
+                                <li>
+                                    <label for="adults">Adults:</label>
+                                    <select id="adults">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="children">Children (2 - 12 Years):</label>
+                                    <select id="children">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="infants">Infants (0 - 23 Months):</label>
+                                    <select id="infants">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Onward Cabin Class Dropdown -->
+                    <label for="onwardCabinClass">Onward Cabin Class:</label>
+                    <select id="onwardCabinClass">
+                        <option value="economy">Economy</option>
+                        <option value="premium-economy">Premium Economy</option>
+                        <option value="business">Business</option>
+                        <option value="first-class">First Class</option>
+                    </select>
+
+                    <!-- Return Cabin Class Dropdown -->
+                    <label for="returnCabinClass">Return Cabin Class:</label>
+                    <select id="returnCabinClass">
+                        <option value="economy">Economy</option>
+                        <option value="premium-economy">Premium Economy</option>
+                        <option value="business">Business</option>
+                        <option value="first-class">First Class</option>
+                    </select>
+
+                    <!-- Add new radio buttons for Direct Flight, Nearby Airports, Student Fare, and Sr. Citizen Fare -->
+                    <div class="additional-options">
+                        <label>
+                            <input type="radio" name="additionalOption" value="direct-flight">
+                            Direct Flight
+                        </label>
+                        <label>
+                            <input type="radio" name="additionalOption" value="nearby-airports">
+                            Nearby Airports
+                        </label>
+                        <label>
+                            <input type="radio" name="additionalOption" value="student-fare">
+                            Student Fare
+                        </label>
+                        <label>
+                            <input type="radio" name="additionalOption" value="sr-citizen-fare">
+                            Sr. Citizen Fare
+                        </label>
+                    </div>
+
+                    <!-- Radio buttons for Low Cost Airlines and GDS Airlines -->
+                    <div class="airline-type-options">
+                        <label>
+                            <input type="radio" name="airlineType" value="low-cost" checked>
+                            Low Cost Airlines
+                        </label>
+                        <label>
+                            <input type="radio" name="airlineType" value="gds">
+                            GDS Airlines
+                        </label>
+                    </div>
+
+                    <!-- Airline Preference Dropdown -->
+                    <div class="airline-preferences">
+                        <button type="button" class="dropdown-button" onclick="toggleAirlineDropdown()">Airline Preference</button>
+                        <div id="airlineDropdown" class="dropdown-content">
+                            <label><input type="checkbox" id="selectAllAirlines" onclick="selectAllAirlines()"> Select All</label>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" data-icon="🔍" aria-label="Search">Search</button>
+                </form>
+                <div class="recent-searches sticky-box">
+                    <h3 data-icon="⏳">Recent Searches</h3>
+                    <!-- Add recent searches here -->
+                </div>
+                <div class="special-offers">
+                    <h3 data-icon="🏷️">Special Offers</h3>
+                    <p>Get 20% off on othertravelsonline.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Travel Booking</p>
+        <div class="fixed-help-icon">
+            <a href="support.html" title="Help & Support"><i class="fas fa-question-circle"></i></a>
+            <a href="telegram.html" title="Telegram"><i class="fas fa-paper-plane"></i></a>
+        </div>
+    </footer>
+    <script>
+        function showLoginForm() {
+            document.getElementById('auth-forms-container').style.display = 'block';
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('registration-form').classList.remove('active');
+            document.getElementById('forgot-password-form').classList.remove('active');
+        }
+
+        function showRegistrationForm() {
+            document.getElementById('auth-forms-container').style.display = 'block';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('registration-form').classList.add('active');
+            document.getElementById('forgot-password-form').classList.remove('active');
+        }
+
+        function showForgotPasswordForm() {
+            document.getElementById('auth-forms-container').style.display = 'block';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('registration-form').classList.remove('active');
+            document.getElementById('forgot-password-form').classList.add('active');
+        }
+
+        function closeAuthForms() {
+            document.getElementById('auth-forms-container').style.display = 'none';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('registration-form').classList.remove('active');
+            document.getElementById('forgot-password-form').classList.remove('active');
+        }
+
+        function toggleAirlineDropdown() {
+            var dropdown = document.getElementById('airlineDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function selectAllAirlines() {
+            var selectAllCheckbox = document.getElementById('selectAllAirlines');
+            var checkboxes = document.querySelectorAll('#airlineDropdown input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox !== selectAllCheckbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                }
+            });
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.dropdown-button') && !event.target.closest('#airlineDropdown')) {
+                document.getElementById('airlineDropdown').style.display = 'none';
+            }
+            if (!event.target.closest('#auth-forms-container') && !event.target.closest('.auth-forms a')) {
+                closeAuthForms();
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
